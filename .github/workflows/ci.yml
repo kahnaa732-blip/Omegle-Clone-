@@ -1,0 +1,44 @@
+name: Haven Continuous Integration & Security Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-and-test:
+    name: Backend Test Suite & Frontend Build Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: |
+            server/package-lock.json
+            client/package-lock.json
+
+      - name: Install Backend Dependencies
+        working-directory: server
+        run: npm ci
+
+      - name: Run Master Verification & Security Test Suite
+        working-directory: server
+        run: npm test
+
+      - name: Install Frontend Dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Validate Production Frontend Vite Build
+        working-directory: client
+        run: npm run build
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config

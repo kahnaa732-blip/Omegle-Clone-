@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds
+dist/
+*/dist/
+build/
+*/build/
+
+# Environment and credentials
+.env
+.env.local
+.env.*.local
+server/.env
+client/.env
+
+# SQLite and runtime databases
+*.db
+*.db-shm
+*.db-wal
+server/haven.db*
+server/db/*.db
+
+# Logs and debug files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Scratch and temporary testing files
+scratch/
+.tmp/
+
+# OS metadata
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db

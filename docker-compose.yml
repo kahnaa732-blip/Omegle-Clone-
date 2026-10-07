@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: haven-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "no", "--save", ""] # Ephemeral in-memory only, zero disk writes for privacy
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: haven-server
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - REDIS_URL=redis://redis:6379
+      - TURN_SECRET=haven_turn_secret_key_change_in_production
+      - TURN_HOST=localhost
+      - TURN_PORT=3478
+      - TURNS_PORT=5349
+      - ADMIN_API_KEY=haven_admin_secret_key_2026
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: haven-client
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  coturn:
+    image: coturn/coturn:alpine
+    container_name: haven-coturn
+    restart: unless-stopped
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "5349:5349/tcp"
+      - "5349:5349/udp"
+    command:
+      - "--log-file=stdout"
+      - "--listening-port=3478"
+      - "--tls-listening-port=5349"
+      - "--fingerprint"
+      - "--lt-cred-mech"
+      - "--use-auth-secret"
+      - "--static-auth-secret=haven_turn_secret_key_change_in_production"
+      - "--realm=haven.chat"
+      - "--stale-nonce=600"
+      - "--max-allocate-lifetime=600"
+      - "--no-cli"

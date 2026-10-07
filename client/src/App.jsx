@@ -16,6 +16,7 @@ import { WebRTCConnection } from './utils/webrtc.js';
 import { E2EESession } from './utils/e2ee.js';
 import { sounds } from './utils/soundEffects.js';
 import { AVAILABLE_LANGUAGES } from './utils/languages.js';
+import logoImg from './assets/logo.png';
 import { 
   ShieldCheck, 
   Video, 
@@ -928,7 +929,7 @@ export default function App() {
           >
             <div className="relative">
               <img 
-                src="/logo.png" 
+                src={logoImg} 
                 alt="Omnexlo Logo" 
                 className="w-8 h-8 rounded-xl object-cover shadow-md shadow-cyan-500/20 ring-1 ring-cyan-500/30 group-hover:ring-cyan-400 group-hover:scale-105 transition-all" 
               />

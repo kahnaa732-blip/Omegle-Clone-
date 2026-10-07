@@ -18,6 +18,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { AVAILABLE_LANGUAGES } from '../utils/languages.js';
+import logoImg from '../assets/logo.png';
 
 const SUGGESTED_TOPICS = ['gaming', 'anime', 'music', 'coding', 'movies', 'books', 'philosophy', 'travel'];
 
@@ -197,7 +198,7 @@ export function LandingHero({
 
           <div className="flex items-center gap-2.5">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="Omnexlo Logo" 
               className="w-8 h-8 rounded-xl object-cover shadow-md shadow-cyan-500/20 ring-1 ring-white/10" 
             />
@@ -222,7 +223,7 @@ export function LandingHero({
               {/* Pulsing Backglow Aura */}
               <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500 rounded-full blur-xl opacity-60 group-hover:opacity-85 transition duration-700 animate-glow-pulse" />
               <img
-                src="/logo.png"
+                src={logoImg}
                 alt="Omnexlo Logo Centerpiece"
                 className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover shadow-2xl ring-2 ring-white/20"
               />

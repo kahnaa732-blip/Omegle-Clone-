@@ -17,6 +17,7 @@ import {
   Radio
 } from 'lucide-react';
 import { ReactionsOverlay } from './ReactionsOverlay.jsx';
+import logoImg from '../assets/logo.png';
 
 export function VideoStage({
   chatMode = 'video',
@@ -133,7 +134,7 @@ export function VideoStage({
               <div className="relative">
                 <div className="absolute -inset-3 bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500 rounded-3xl blur-xl opacity-70 animate-glow-pulse" />
                 <img
-                  src="/logo.png"
+                  src={logoImg}
                   alt="Connecting"
                   className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover shadow-2xl ring-2 ring-white/20 animate-pulse"
                 />

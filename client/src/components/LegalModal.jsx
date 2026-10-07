@@ -12,8 +12,8 @@ import {
   EyeOff,
   Flame,
   Terminal,
-  ServerOff
 } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 const TABS = [
   { id: 'community', label: 'Community Guidelines', icon: ShieldCheck },
@@ -36,7 +36,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'community' }) {
         <div className="p-5 border-b border-slate-700/60 flex items-center justify-between bg-dark-900/60">
           <div className="flex items-center gap-2.5">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="Omnexlo" 
               className="w-8 h-8 rounded-xl object-cover shadow-sm ring-1 ring-white/10" 
             />

@@ -1,8 +1,10 @@
-# HAVEN — Privacy-First Temporary Random Conversations
+# OMNEXLO — Next-Gen Encrypted Omegle Clone
 
-**Haven** is a production-ready, privacy-first random conversation platform engineered with zero-knowledge cryptography, decentralized WebSockets, hardware-accelerated WebRTC, and defense-in-depth safety controls.
+**Omnexlo** is a modern, high-performance, privacy-first random conversation platform engineered with zero-knowledge cryptography, WebSockets matchmaking, hardware-accelerated WebRTC, and defense-in-depth safety controls.
 
-Built with an original brand, original UI, and strong privacy and moderation protections — avoiding the pitfalls, privacy leaks, and abuse patterns of legacy random chat platforms like Omegle.
+Built with an original dark futuristic aesthetic, neon ambient lighting, responsive 60FPS UI, and end-to-end encryption — offering a far superior, secure alternative to legacy random chat platforms like Omegle.
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
 ---
 

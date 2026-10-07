@@ -6,12 +6,20 @@ import dotenv from 'dotenv';
 import Redis from 'ioredis';
 import { randomUUID } from 'crypto';
 
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
 import { Matchmaker } from './matchmaking.js';
 import { ReputationManager } from './reputation.js';
 import { getIceServers } from './turnAuth.js';
 import { db, hashIp } from './db.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../client/dist');
 
 const PORT = process.env.PORT || 4000;
 const ADMIN_API_KEY = process.env.ADMIN_API_KEY || 'haven_admin_secret_key_2026';
@@ -658,6 +666,24 @@ setInterval(() => {
     console.warn('⚠️ Retention prune error:', err.message);
   }
 }, 60000);
+
+// 🌐 Production Static Web Hosting for React Frontend
+if (fs.existsSync(distPath)) {
+  console.log('📦 Serving production frontend bundle from:', distPath);
+  app.use(express.static(distPath));
+  // Single-Page Application (SPA) routing fallback for all paths (e.g. /chat)
+  app.get('*', (req, res, next) => {
+    if (
+      req.path.startsWith('/api') || 
+      req.path.startsWith('/socket.io') || 
+      req.path === '/health' || 
+      req.path === '/metrics'
+    ) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
 
 server.listen(PORT, () => {
   console.log(`🚀 Haven Matchmaking & Signaling Server listening on port ${PORT}`);

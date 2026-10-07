@@ -254,7 +254,7 @@ export default function App() {
 
   // 3. Initialize Socket.IO connection
   useEffect(() => {
-    const socketUrl = window.location.origin;
+    const socketUrl = import.meta.env.VITE_SERVER_URL || window.location.origin;
     const newSocket = io(socketUrl, {
       auth: { sessionId: getSessionId() },
       reconnectionAttempts: 5

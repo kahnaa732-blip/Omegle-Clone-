@@ -1,0 +1,26 @@
+{
+  "name": "omnexlo-omegle-clone",
+  "version": "1.0.0",
+  "description": "Omnexlo - High-performance modern encrypted Omegle Clone with WebRTC video & text chat",
+  "main": "server/server.js",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "build": "npm --prefix client install && npm --prefix client run build && npm --prefix server install",
+    "start": "node server/server.js",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "omegle-clone",
+    "webrtc",
+    "socket.io",
+    "video-chat",
+    "random-chat",
+    "e2ee"
+  ],
+  "author": "Anjan Ray Senapati",
+  "license": "MIT"
+}
